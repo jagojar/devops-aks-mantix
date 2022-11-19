@@ -16,7 +16,7 @@ variables:
   tag: 'v'
   imagePullSecret: 'acrpullsec'
   k8sNamespace: 'default'
-  'mtt-aks-connection'
+  kubernetesServiceConnection: 'mtt-aks-connection'
 
 stages:
 - stage: Build
@@ -87,7 +87,7 @@ stages:
             displayName: Deploy to Kubernetes cluster
             inputs:              
               action: deploy
-              kubernetesServiceConnection: 'mtt-aks-connection'
+              kubernetesServiceConnection: $(kubernetesServiceConnection)
               namespace: $(k8sNamespace)
               manifests: |
                 $(System.ArtifactsDirectory)/manifests/azure-vote-all-in-one-redis.yml                
