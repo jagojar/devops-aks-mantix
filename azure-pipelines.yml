@@ -47,7 +47,7 @@ stages:
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(tag).(Build.BuildId)
+          $(tag).$(Build.BuildId)
 
     - task: PublishPipelineArtifact@1
       inputs:
