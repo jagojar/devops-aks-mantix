@@ -9,7 +9,7 @@ variables:
   azureServiceConnection: 'AKS-Service-Connection'
   resourceGroupName: 'aks-demo-rg'
   location: 'centralus'
-  templateFile: './main.bicep'
+  templateFile: '.Infrastructure/main.bicep'
 pool:
   vmImage: $(vmImageName)
 
@@ -26,3 +26,4 @@ steps:
     overrideParameters: '-clusterName $(clusterName) -dnsPrefix $(dnsPrefix) -linuxAdminUsername $(linuxAdminUsername) -sshRSAPublicKey $(ssh_key)'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
+
