@@ -42,15 +42,20 @@ stages:
     #   env:
     #     SSH_KEY_VAL: "$(ssh_key)"
 
-    - task: qetza.replacetokens.replacetokens-task.replacetokens@3
-      displayName: 'Replace tokens in backend-webapi.yaml'
+    - task: replacetokens@5
       inputs:
-        rootDirectory: manifests
-        targetFiles: 'azure-vote-all-in-one-redis.yaml'
-        tokenPrefix: '$__'
-        tokenSuffix: '__'
-      env:
-        tag1: $(tag)
+        rootDirectory: 'manifests'
+        targetFiles: '*.yaml'
+        encoding: 'auto'
+        tokenPattern: 'rm'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: false
+        actionOnNoFiles: 'continue'
+        enableTransforms: false
+        enableRecursion: false
+        useLegacyPattern: false
+        enableTelemetry: true
     
     - task: PublishPipelineArtifact@1
       inputs:
