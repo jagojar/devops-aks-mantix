@@ -6,6 +6,7 @@ Proyecto demo para DevOps de contenedores con Azure Kubernetes Service y Azure D
 1.	app: código fuente de app Python para votar por dogs vs cats
 2.	Infrastructure: archivo bicep para el cluster de Aks
 3.	manifests: archivo yaml para correr apps en Aks
+4.  azure-pipelin.yml: pipeline de AzDO para crear image Docker y ejecutar en AKS.
 
 # Referencias
 
