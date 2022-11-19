@@ -52,7 +52,7 @@ stages:
         tags: |
           $(tag)
    
-    - task: Tokenizer@0
+    - task: 4tecture.Tokenizer.Tokenizer.Tokenizer@0
       inputs:
         sourceFilesPattern: './manifests'
         tokenDataSource: 'environmentVariables'
