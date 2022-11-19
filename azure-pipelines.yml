@@ -23,6 +23,6 @@ steps:
     location: '$(location)'
     templateLocation: 'Linked artifact'
     csmFile: '$(templateFile)'
-    overrideParameters: '-storageAccountType Standard_LRS'
+    overrideParameters: '-clusterName $(clusterName) -dnsPrefix $(dnsPrefix) -linuxAdminUsername $(linuxAdminUsername) -sshRSAPublicKey $(ssh_key)'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
