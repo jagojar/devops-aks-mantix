@@ -1,14 +1,14 @@
 trigger:
-- master
+- none
 
 name: Deploy Bicep files
 
 variables:
   vmImageName: 'ubuntu-latest'
 
-  azureServiceConnection: '<your-connection-name>'
-  resourceGroupName: 'exampleRG'
-  location: '<your-resource-group-location>'
+  azureServiceConnection: 'AKS-Service-Connection'
+  resourceGroupName: 'aks-demo-rg'
+  location: 'centralus'
   templateFile: './main.bicep'
 pool:
   vmImage: $(vmImageName)
