@@ -52,10 +52,13 @@ stages:
         tags: |
           $(tag)
    
-    - task: 4tecture.Tokenizer.Tokenizer.Tokenizer@0
+    
+    - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+      displayName: 'Replace tokens in backend-webapi.yaml'
       inputs:
-        sourceFilesPattern: './manifests'
-        tokenDataSource: 'environmentVariables'
+        targetFiles: './manifests/*.yaml'
+        tokenPrefix: '$__'
+        tokenSuffix: '__'
         
 
     - task: PublishPipelineArtifact@1
