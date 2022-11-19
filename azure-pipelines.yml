@@ -91,7 +91,7 @@ stages:
               kubernetesServiceConnection: $(kubernetesServiceConnection)
               namespace: $(k8sNamespace)
               manifests: |
-                $(System.ArtifactsDirectory)/manifests/azure-vote-all-in-one-redis.yml                
+                $(System.ArtifactsDirectory)/manifests/azure-vote-all-in-one-redis.yaml                
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
