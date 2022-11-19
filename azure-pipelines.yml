@@ -36,7 +36,7 @@ stages:
         deploymentMode: 'Incremental'
         deploymentName: 'DeployPipelineTemplate'
       env:
-        SSH_KEY_VAL: $(ssh_key)
+        SSH_KEY_VAL: '$(ssh_key)'
 
     - task: Docker@2
       displayName: Build and push an image to container registry
