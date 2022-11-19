@@ -9,7 +9,7 @@ variables:
   azureServiceConnection: 'AKS-Service-Connection'
   resourceGroupName: 'aks-demo-rg'
   location: 'centralus'
-  templateFile: '.Infrastructure/main.bicep'
+  templateFile: './Infrastructure/main.bicep'
 pool:
   vmImage: $(vmImageName)
 
