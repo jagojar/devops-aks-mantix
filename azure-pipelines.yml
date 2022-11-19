@@ -53,7 +53,7 @@ stages:
           $(tag)
     - task: replacetokens@5
       inputs:
-        rootDirectory: '$(System.ArtifactsDirectory)/manifests/'
+        rootDirectory: '$(System.ArtifactsDirectory)/manifests'
         targetFiles: '**/*.yaml'
         encoding: 'auto'
         tokenPattern: 'azpipelines'
