@@ -27,20 +27,20 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: AzureResourceManagerTemplateDeployment@3
-      inputs:
-        deploymentScope: 'Resource Group'
-        azureResourceManagerConnection: '$(azureServiceConnection)'
-        action: 'Create Or Update Resource Group'
-        resourceGroupName: '$(resourceGroupName)'
-        location: '$(location)'
-        templateLocation: 'Linked artifact'
-        csmFile: '$(templateFile)'
-        overrideParameters: '-clusterName $(clusterName) -dnsPrefix $(dnsPrefix) -linuxAdminUsername $(linuxAdminUsername) -sshRSAPublicKey "$(ssh_key_value)"'
-        deploymentMode: 'Incremental'
-        deploymentName: 'DeployPipelineTemplate'      
-      env:
-        ssh_key_value: $(ssh_key)
+    # - task: AzureResourceManagerTemplateDeployment@3
+    #   inputs:
+    #     deploymentScope: 'Resource Group'
+    #     azureResourceManagerConnection: '$(azureServiceConnection)'
+    #     action: 'Create Or Update Resource Group'
+    #     resourceGroupName: '$(resourceGroupName)'
+    #     location: '$(location)'
+    #     templateLocation: 'Linked artifact'
+    #     csmFile: '$(templateFile)'
+    #     overrideParameters: '-clusterName $(clusterName) -dnsPrefix $(dnsPrefix) -linuxAdminUsername $(linuxAdminUsername) -sshRSAPublicKey "$(ssh_key_value)"'
+    #     deploymentMode: 'Incremental'
+    #     deploymentName: 'DeployPipelineTemplate'      
+    #   env:
+    #     ssh_key_value: $(ssh_key)
 
     - task: replacetokens@5
       inputs:
