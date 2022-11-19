@@ -49,6 +49,8 @@ stages:
         targetFiles: 'azure-vote-all-in-one-redis.yaml'
         tokenPrefix: '$__'
         tokenSuffix: '__'
+      env:
+        tag1: $(tag)
     
     - task: PublishPipelineArtifact@1
       inputs:
