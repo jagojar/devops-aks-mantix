@@ -11,8 +11,9 @@ variables:
   location: 'centralus'
   templateFile: './Infrastructure/main.bicep'
   imageRepository: 'azure-vote-front'
-  dockerfilePath: '**/Dockerfile'
-  dockerRegistryServiceConnection: ''
+  dockerfilePath: '**/Dockerfile'  
+  dockerRegistryServiceConnection: 'Docker-Registry-Connection'
+  tag: 'v'
 
 stages:
 - stage: Infrastructure
@@ -46,7 +47,7 @@ stages:
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(tag)
+          $(tag).(Build.BuildId)
 
     - task: PublishPipelineArtifact@1
       inputs:
