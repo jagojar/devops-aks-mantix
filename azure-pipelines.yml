@@ -54,9 +54,9 @@ stages:
    
     - task: Tokenizer@0
       inputs:
-        sourceFilesPattern: './manifests/*.yaml'
+        sourceFilesPattern: './manifests'
         tokenDataSource: 'environmentVariables'
-        tokenIdentifierRegex: '({)([a-zA-Z0-9\.\-_]*)(})'
+        
 
     - task: PublishPipelineArtifact@1
       inputs:
