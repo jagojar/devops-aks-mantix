@@ -39,6 +39,8 @@ stages:
         overrideParameters: '-clusterName $(clusterName) -dnsPrefix $(dnsPrefix) -linuxAdminUsername $(linuxAdminUsername) -sshRSAPublicKey "$(ssh_key_value)"'
         deploymentMode: 'Incremental'
         deploymentName: 'DeployPipelineTemplate'      
+      env:
+        ssh_key_value: $(ssh_key)
 
     - task: replacetokens@5
       inputs:
