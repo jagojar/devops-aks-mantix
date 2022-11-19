@@ -13,7 +13,7 @@ variables:
   imageRepository: 'azure-vote-front'
   dockerfilePath: '**/Dockerfile'  
   dockerRegistryServiceConnection: 'Docker-Registry-Connection'
-  tag: 'v'
+  tag: 'v$(Build.BuildId)'
   imagePullSecret: 'acrpullsec'
   k8sNamespace: 'default'
   kubernetesServiceConnection: 'mtt-aks-connection'
@@ -50,7 +50,21 @@ stages:
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(tag).$(Build.BuildId)
+          $(tag)
+    - task: replacetokens@5
+      inputs:
+        rootDirectory: '$(System.ArtifactsDirectory)/manifests/'
+        targetFiles: '**/*.yaml'
+        encoding: 'auto'
+        tokenPattern: 'azpipelines'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: false
+        actionOnNoFiles: 'continue'
+        enableTransforms: false
+        enableRecursion: false
+        useLegacyPattern: false
+        enableTelemetry: true
 
     - task: PublishPipelineArtifact@1
       inputs:
