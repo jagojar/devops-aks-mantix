@@ -10,20 +10,47 @@ variables:
   resourceGroupName: 'aks-demo-rg'
   location: 'centralus'
   templateFile: './Infrastructure/main.bicep'
-pool:
-  vmImage: $(vmImageName)
+  imageRepository: 'azure-vote-front'
 
-steps:
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: '$(azureServiceConnection)'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: '$(resourceGroupName)'
-    location: '$(location)'
-    templateLocation: 'Linked artifact'
-    csmFile: '$(templateFile)'
-    overrideParameters: '-clusterName $(clusterName) -dnsPrefix $(dnsPrefix) -linuxAdminUsername $(linuxAdminUsername) -sshRSAPublicKey $(ssh_key)'
-    deploymentMode: 'Incremental'
-    deploymentName: 'DeployPipelineTemplate'
+# pool:
+#   vmImage: $(vmImageName)
+
+# steps:
+# - task: AzureResourceManagerTemplateDeployment@3
+#   inputs:
+#     deploymentScope: 'Resource Group'
+#     azureResourceManagerConnection: '$(azureServiceConnection)'
+#     action: 'Create Or Update Resource Group'
+#     resourceGroupName: '$(resourceGroupName)'
+#     location: '$(location)'
+#     templateLocation: 'Linked artifact'
+#     csmFile: '$(templateFile)'
+#     overrideParameters: '-clusterName $(clusterName) -dnsPrefix $(dnsPrefix) -linuxAdminUsername $(linuxAdminUsername) -sshRSAPublicKey $(ssh_key)'
+#     deploymentMode: 'Incremental'
+#     deploymentName: 'DeployPipelineTemplate'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        artifactName: 'manifests'
+        path: 'manifests' 
+
 
