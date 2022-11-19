@@ -1,7 +1,7 @@
 # Introducción 
 Proyecto demo para DevOps de contenedores con Azure Kubernetes Service y Azure DevOps. 
 
-# Archivos
+# Estructura de carpetas
 
 1.	app: código fuente de app Python para votar por dogs vs cats
 2.	Infrastructure: archivo bicep para el cluster de Aks
