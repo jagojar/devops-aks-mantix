@@ -1,7 +1,7 @@
 trigger:
 - none
 
-name: Deploy Bicep files
+name: Deploy App to AKS
 
 variables:
   vmImageName: 'ubuntu-latest'
@@ -51,20 +51,12 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - task: replacetokens@5
+   
+    - task: Tokenizer@0
       inputs:
-        rootDirectory: './manifests'
-        targetFiles: '**/*.yaml'
-        encoding: 'auto'
-        tokenPattern: 'azpipelines'
-        writeBOM: true
-        actionOnMissing: 'warn'
-        keepToken: false
-        actionOnNoFiles: 'continue'
-        enableTransforms: false
-        enableRecursion: false
-        useLegacyPattern: false
-        enableTelemetry: true
+        sourceFilesPattern: './manifests/*.yaml'
+        tokenDataSource: 'environmentVariables'
+        tokenIdentifierRegex: '({)([a-zA-Z0-9\.\-_]*)(})'
 
     - task: PublishPipelineArtifact@1
       inputs:
