@@ -18,8 +18,8 @@ variables:
   k8sNamespace: 'default'
 
 stages:
-- stage: Infrastructure
-  displayName: Build Infrastructure
+- stage: Build
+  displayName: Build Images
   jobs:  
   - job: Infrastructure 
     displayName: Build Infrastructure
