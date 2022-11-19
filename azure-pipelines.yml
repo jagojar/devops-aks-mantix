@@ -23,7 +23,7 @@ stages:
   displayName: Build Images
   jobs:  
   - job: Infrastructure 
-    displayName: Build Infrastructure
+    displayName: Image Job
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -36,11 +36,11 @@ stages:
     #     location: '$(location)'
     #     templateLocation: 'Linked artifact'
     #     csmFile: '$(templateFile)'
-    #     overrideParameters: '-clusterName $(clusterName) -dnsPrefix $(dnsPrefix) -linuxAdminUsername $(linuxAdminUsername) -sshRSAPublicKey $(SSH_KEY_VAL)'
+    #     overrideParameters: '-clusterName $(clusterName) -dnsPrefix $(dnsPrefix) -linuxAdminUsername $(linuxAdminUsername) -sshRSAPublicKey "$(ssh_key_value)"'
     #     deploymentMode: 'Incremental'
-    #     deploymentName: 'DeployPipelineTemplate'
+    #     deploymentName: 'DeployPipelineTemplate'      
     #   env:
-    #     SSH_KEY_VAL: "$(ssh_key)"
+    #     ssh_key_value: $(ssh_key)
 
     - task: replacetokens@5
       inputs:
